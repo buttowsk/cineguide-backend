@@ -2,7 +2,7 @@ FROM python:3.11-alpine
 
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /apiDjango
+WORKDIR /catalogs
 
 RUN python -m venv /venv
 

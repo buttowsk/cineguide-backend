@@ -12,6 +12,7 @@ services:
       - catalogs
     networks:
       - network
+
   auth:
     build: ../auth
     ports:
@@ -20,7 +21,7 @@ services:
       - db
     networks:
       - network
-  #payment:
+    #payment:
     #build: ../payment
     #ports:
     #  - "8082:8082"
@@ -28,16 +29,25 @@ services:
     #  - db
     #networks:
     #  - network 
+
   catalogs:
     build: ../catalogs
     ports:
       - "8083:8083"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - TMDB_API_KEY=1dff2f0530f95ef25e34068a5c3bfea0
     depends_on:
       - db
     networks:
-      - network  
+      - network
+
   db:
-    image: postgres:latest
+    image: postgres:alpine
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -47,9 +57,11 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - network
 
 volumes:
-  pgdata: {}
+  pgdata:
 
 networks:
   network:

@@ -12,12 +12,4 @@ spring:
       - id: route2
         uri: http://catalogs:8083
         predicates:
-        - Path=/movies/**
-      - id: route3
-        uri: http://catalogs:8083
-        predicates:
-        - Path=/catalog-movies/**
-      - id: route4
-        uri: http://catalogs:8083
-        predicates:
-        - Path=/add-movies/**
+        - Path=/catalog/**
