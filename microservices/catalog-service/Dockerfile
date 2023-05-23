@@ -4,7 +4,7 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /catalogs
 
-RUN python -m venv /venv
+RUN python -m venv venv
 
 ENV PATH="/venv/bin:$PATH"
 

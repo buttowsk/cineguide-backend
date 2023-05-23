@@ -2,9 +2,12 @@ import os, requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
-from catalog.models import Movie, Catalog, CatalogMovie
-from catalog.serializers import MovieSerializer, CatalogSerializer, CatalogMovieSerializer
+from .models import Movie, Catalog, CatalogMovie
+from .serializers import MovieSerializer, CatalogSerializer, CatalogMovieSerializer
 from dotenv import load_dotenv
+from PIL import Image
+from collections import Counter
+from io import BytesIO
 
 
 load_dotenv()
@@ -114,8 +117,18 @@ class AddMovies(APIView):
             movie_data = response.json()
             br_certification = None
             us_certification = None
-            movie_data['backdrop_path'] = 'https://image.tmdb.org/t/p/w500' + movie_data['backdrop_path']
-            movie_data['poster_path'] = 'https://image.tmdb.org/t/p/w500' + movie_data['poster_path']
+            movie_data['backdrop_path'] = 'https://image.tmdb.org/t/p/w1280' + movie_data['backdrop_path']
+            movie_data['poster_path'] = 'https://image.tmdb.org/t/p/original' + movie_data['poster_path']
+
+            backdrop_response = requests.get(movie_data['backdrop_path'])
+            image_info = Image.open(BytesIO(backdrop_response.content))
+            imagem = image_info.convert("RGB")
+            imagem = imagem.resize((100, 100))
+            cores = imagem.getdata()
+            contagem_cores = Counter(cores)
+            cor_predominante = contagem_cores.most_common(1)[0][0]
+            paleta_cores = contagem_cores.most_common(5)
+
 
             for country in movie_data['release_dates']['results']:
                 if country['iso_3166_1'] == 'BR':
@@ -144,6 +157,7 @@ class AddMovies(APIView):
                 videos=youtube_key,
                 br_certification=br_certification,
                 us_certification=us_certification,
+                colors=cor_predominante,
             )
             movie.save()
 

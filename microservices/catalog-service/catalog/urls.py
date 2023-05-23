@@ -1,5 +1,5 @@
 from django.urls import path
-from catalog.views import CatalogView, CatalogDetailView, MovieView, CatalogMovieView, AddMovies, ClearDb
+from .views import CatalogView, CatalogDetailView, MovieView, CatalogMovieView, AddMovies, ClearDb
 
 urlpatterns = [
     path('', CatalogView.as_view()),

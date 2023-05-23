@@ -24,6 +24,7 @@ class Movie(models.Model):
     videos = models.JSONField(null=True)
     br_certification = models.CharField(max_length=255, null=True)
     us_certification = models.CharField(max_length=255, null=True)
+    colors = models.CharField(max_length=255, null=True)
     catalogs = models.ManyToManyField(Catalog, through='CatalogMovie')
 
     def __repr__(self):
