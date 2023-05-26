@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-azkm)op)anw)m8ef=_ai@-x7m*457u21hv^u5ay81_h#$t34mz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['catalogs', 'localhost', '172.16.0.0', 'localhost:5173']
+ALLOWED_HOSTS = ['catalogs', 'localhost', '172.16.0.0', 'localhost:5173', 'buttowsk-effective-halibut-vjqjgq46x6jhwrg4-8080.preview.app.github.dev']
 
 # Application definition
 
@@ -60,6 +60,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8082',
     'http://172.16.0.0',
     'http://localhost:5173',
+    "http://buttowsk-effective-halibut-vjqjgq46x6jhwrg4-8080.preview.app.github.dev"
 ]
 
 CORS_ORIGIN_WHITELIST = [

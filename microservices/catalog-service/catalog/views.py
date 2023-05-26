@@ -113,7 +113,7 @@ class AddMovies(APIView):
         data = response.json()
         for movie in data['results']:
             response = requests.get(
-                f'http://api.themoviedb.org/3/movie/{movie["id"]}?api_key={api_key}&append_to_response=videos,release_dates')
+                f'http://api.themoviedb.org/3/movie/{movie["id"]}?api_key={api_key}&append_to_response=videos,release_dates&language=pt')
             movie_data = response.json()
             br_certification = None
             us_certification = None

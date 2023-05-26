@@ -12,22 +12,14 @@ services:
     networks:
       - network
 
-  #auth:
-    #build: ../microservices/auth-service
-    #ports:
-    #  - "8081:8081"
-    #depends_on:
-    #  - db
-    #networks:
-     # - network
-    #payment:
-    #build: ../payment
-    #ports:
-    #  - "8082:8082"
-    #depends_on:
-    #  - db
-    #networks:
-    #  - network 
+  auth:
+    build: ../microservices/auth-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+    networks:
+      - network
 
   catalogs:
     build: ../microservices/catalog-service
