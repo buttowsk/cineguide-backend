@@ -21,7 +21,8 @@ blueprint = make_google_blueprint(
     client_id=client_id,
     client_secret=client_secret,
     reprompt_consent=True,
-    scope=["profile", "email"]
+    scope=["profile", "email"],
+    redirect_to="https://buttowsk-effective-halibut-vjqjgq46x6jhwrg4-8081.preview.app.github.dev/login/google/authorized"
 )
 
 
@@ -43,6 +44,11 @@ def index():
 @app.route("/login")
 def login():
     return redirect(url_for("google.login"))
+
+@app.route("/login/google/authorized")
+def authorized():
+    return redirect(url_for("index"))
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8081)        
